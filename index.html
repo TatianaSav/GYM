@@ -50,10 +50,20 @@
 
 <h1 class="text-center mt-4">Coaching Staff</h1>
 
+<!--Form for adding new pictures in the list-->
+<div class="form-inline">
+  <div class="container">
+    <div class="form-group mb-2">
+      <label for="AddPicture" class="sr-only">Add Picture</label>
+      <input type="text" class="form-control" id="AddPicture" placeholder="enter URL">
+    </div>
+  <button type="submit" class="btn btn-primary mb-2" id="btn-submit" onclick="displayImage()">Submit</button>
+  <div id="imgDisplayArea"></div>
+</div>
 
 <div id=Pictures class="bg-light mt-5 py-5">
   <div class="container bg-light gallery mt-3 mb-3">
-    <div class="row g-3">
+    <div class="row g-3" id="picture-container">
 
       <!-- Image 1 -->
       <div class="col-12 col-md-6 col-lg-3" id="img1">
