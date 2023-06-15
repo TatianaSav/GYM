@@ -42,6 +42,7 @@ function deletePhoto(parentId, url) {
     }
     localStorage.setItem("images", JSON.stringify(urls));
 }
+
 // Add image and save in the LocalStorage
 function addImage() {
     const imgUrl = document.getElementById('AddPicture').value;
