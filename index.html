@@ -54,6 +54,9 @@
 <div class="form-inline">
   <div class="container">
     <div class="form-group mb-2">
+      <label for="imgLabel" class="sr-only">Label</label>
+      <input type="text" class="form-control" id="imgLabel" placeholder="enter label">
+
       <label for="AddPicture" class="sr-only">Add Picture</label>
       <input type="text" class="form-control" id="AddPicture" placeholder="enter URL">
     </div>
@@ -64,96 +67,6 @@
   <div id=Pictures class="bg-light mt-5 py-5">
     <div class="container bg-light gallery mt-3 mb-3">
       <div class="row g-3" id="picture-container">
-
-        <!-- &lt;!&ndash; Image 1 &ndash;&gt;
-         <div class="col-12 col-md-6 col-lg-3" id="img1">
-           <div class="picture"
-                style="background-image: url(https://p0.zoon.ru/6/8/57694795dd2c77c1028b4573_5a3762fbce2c5.jpg)">
-             <button class="btn btn-dark btn-custom mt-2" onclick="deletePhoto('img1')">X</button>
-           </div>
-         </div>
-
-         &lt;!&ndash; Image 2 &ndash;&gt;
-         <div class="col-12 col-md-6 col-lg-3" id="img2">
-           <div class="picture"
-                style="background-image: url(https://ooo-ado.ru/wp-content/uploads/2021/11/photo_tjydo.jpg)">
-             <button class="btn btn-dark btn-custom mt-2" onclick="deletePhoto('img2')">X</button>
-           </div>
-         </div>
-         &lt;!&ndash; Image 3 &ndash;&gt;
-         <div class="col-12 col-md-6 col-lg-3" id="img3">
-           <div class="picture"
-                style="background-image: url(https://fitneshero.1c-umi.ru/images/cms/data/59b78a1a88748b6c1038b2b4_5ae1a186a89a6.jpg)">
-             <button class="btn btn-dark btn-custom mt-2" onclick="deletePhoto('img3')">X</button>
-           </div>
-         </div>
-         &lt;!&ndash; Image 4 &ndash;&gt;
-         <div class="col-12 col-md-6 col-lg-3" id="img4">
-           <div class="picture"
-                style="background-image: url(https://trendymen.ru/images/sliders/2252/slide24127.jpg)">
-             <button class="btn btn-dark btn-custom mt-2" onclick="deletePhoto('img4')">X</button>
-           </div>
-         </div>
-
-         &lt;!&ndash; Image 5 &ndash;&gt;
-         <div class="col-12 col-md-6 col-lg-3" id="img5">
-           <div class="picture"
-                style="background-image: url(https://sportishka.com/uploads/posts/2022-03/1648489751_57-sportishka-com-p-zagorulko-trener-sport-krasivie-foto-63.jpg)">
-             <button class="btn btn-dark btn-custom mt-2" onclick="deletePhoto('img5')">X</button>
-           </div>
-         </div>
-         &lt;!&ndash; Image 6 &ndash;&gt;
-         <div class="col-12 col-md-6 col-lg-3" id="img6">
-           <div class="picture"
-                style="background-image: url(https://avatars.mds.yandex.net/i?id=ca94960e9dc704b90a098c169541b8cb069fce87-9065783-images-thumbs&n=13)">
-             <button class="btn btn-dark btn-custom mt-2" onclick="deletePhoto('img6')">X</button>
-           </div>
-         </div>
-         &lt;!&ndash; Image 7 &ndash;&gt;
-         <div class="col-12 col-md-6 col-lg-3" id="img7">
-           <div class="picture"
-                style="background-image: url(https://p2.zoon.ru/7/0/5ce3fe34cfee3c07df208ad8_5ce3ffabd037d.jpg)">
-             <button class="btn btn-dark btn-custom mt-2" onclick="deletePhoto('img7')">X</button>
-           </div>
-         </div>
-         &lt;!&ndash; Image 8 &ndash;&gt;
-         <div class="col-12 col-md-6 col-lg-3" id="img8">
-           <div class="picture"
-                style="background-image: url(https://1.bp.blogspot.com/-fbgavJHRO_s/X_6_XHiHlgI/AAAAAAAABA8/ZCMIkHc4gmQP5yeXSur_XtjOb7VX1Ka6QCLcBGAsYHQ/s849/2021-01-13_12-37-07.jpg)">
-             <button class="btn btn-dark btn-custom mt-2" onclick="deletePhoto('img8')">X</button>
-           </div>
-         </div>
-
-
-         &lt;!&ndash; Image 9 &ndash;&gt;
-         <div class="col-12 col-md-6 col-lg-3" id="img9">
-           <div class="picture"
-                style="background-image: url(https://static.tildacdn.com/tild6230-3634-4562-b339-336463663363/DSC-16-4.jpg)">
-             <button class="btn btn-dark btn-custom mt-2" onclick="deletePhoto('img9')">X</button>
-           </div>
-         </div>
-         &lt;!&ndash; Image 10 &ndash;&gt;
-         <div class="col-12 col-md-6 col-lg-3" id="img10">
-           <div class="picture"
-                style="background-image: url(https://sportishka.com/uploads/posts/2022-08/1660567465_8-sportishka-com-p-luchshie-fitnes-treneri-rossii-sport-krasi-9.jpg)">
-             <button class="btn btn-dark btn-custom mt-2" onclick="deletePhoto('img10')">X</button>
-           </div>
-         </div>
-         &lt;!&ndash; Image 11 &ndash;&gt;
-         <div class="col-12 col-md-6 col-lg-3" id="img11">
-           <div class="picture"
-                style="background-image: url(https://static.tildacdn.com/tild3131-3466-4637-a633-653864393039/DSC_4061-Edit.jpg)">
-             <button class="btn btn-dark btn-custom mt-2" onclick="deletePhoto('img11')">X</button>
-           </div>
-         </div>
-         &lt;!&ndash; Image 12 &ndash;&gt;
-         <div class="col-12 col-md-6 col-lg-3" id="img12">
-           <div class="picture"
-                style="background-image: url(https://p1.zoon.ru/5/e/5f0ec45a0330a3605f4558b1_5f17ccaf4a0fa.jpg)">
-             <button class="btn btn-dark btn-custom mt-2" onclick="deletePhoto('img12')">X</button>
-           </div>
-         </div>
-   -->
       </div>
     </div>
   </div>

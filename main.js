@@ -1,9 +1,10 @@
-// Empty list for URL of images
-let urls = [];
+// Empty list of objects for URL and labels  of images
+let photos = [];
 
 // Checkin if list isn't empty
-if (localStorage.getItem("images")) {
-    urls = JSON.parse(localStorage.getItem("images"));
+const data = load();
+if (data) {
+    photos = JSON.parse(data);
 }
 
 // listen for load event in the window
@@ -19,9 +20,9 @@ window.addEventListener("load", function () {
             fabElement.style.display = "none";
         }
     });
-    // Looping in the list and generate images
-    for (let url of urls) {
-        displayImage(url);
+    // Looping in the list and generate images and labels
+    for (let car of photos) {
+        displayImage(car.label, car.url);
     }
 });
 
@@ -36,28 +37,35 @@ function deletePhoto(parentId, url) {
     let elem = document.getElementById(parentId);
     elem.remove();
 
-    const index = urls.indexOf(url);
-    if (index > -1) { // only splice array when item is found
-        urls.splice(index, 1); // 2nd parameter means remove one item only
-    }
-    localStorage.setItem("images", JSON.stringify(urls));
+    photos = photos.filter(item => item.url !== url);
+    save();
 }
 
-// Add image and save in the LocalStorage
+// Add image with label and save in the LocalStorage
 function addImage() {
     const imgUrl = document.getElementById('AddPicture').value;
+    const imgLabel = document.getElementById('imgLabel').value;
 
-    // Save new image url to LocalStorage
-    urls.push(imgUrl);
-    localStorage.setItem("images", JSON.stringify(urls));
+    // Stop add image if input is empty
+    if (!imgUrl.trim()) {
+       return;
+    }
 
-    // Create image based on user's input
-    displayImage(imgUrl);
+    // Save new image url with label to LocalStorage.
+    const photo = {
+        url: imgUrl,
+        label: imgLabel,
+    }
+    photos.push(photo);
+    save();
+
+    // Create image with label based on user's input
+    displayImage(photo.label, photo.url);
 }
 
 
-// Adding images by url in input
-function displayImage(url) {
+// Adding images by url and label
+function displayImage(label, url) {
     const container = document.getElementById('picture-container');
 
     // Creating elements for support new pictures
@@ -70,6 +78,11 @@ function displayImage(url) {
     pictureElement.style.backgroundImage = `url(${url})`;
     columnElement.appendChild(pictureElement);
 
+    let labelElement = document.createElement('p');
+    labelElement.classList.add('text-center');
+    labelElement.innerText = label;
+    columnElement.appendChild(labelElement);
+
     let buttonElement = document.createElement('button');
     buttonElement.classList.add('btn', 'btn-dark', 'btn-custom', 'mt-2');
     buttonElement.onclick = function () {
@@ -78,10 +91,23 @@ function displayImage(url) {
     buttonElement.innerText = "X";
     pictureElement.appendChild(buttonElement);
 
+
     // Put the new image at the top of the list
     container.insertBefore(columnElement, container.firstChild);
 
     // After executing the request, I remove the url from the input
     document.getElementById('AddPicture').value = "";
+
+    // After executing the request, I remove the label from the input
+    document.getElementById('imgLabel').value = "";
+}
+// Save URl in Local Storage
+function save() {
+  localStorage.setItem("images", JSON.stringify(photos));
+}
+
+// load URl in Local Storage
+function load() {
+    return localStorage.getItem("images");
 }
 
