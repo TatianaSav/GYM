@@ -46,9 +46,28 @@
 </div>
 
 <div id=Pictures class="bg-light py-5">
-<h1 class="text-center pt-4 pb-4">Coaching Staff</h1>
+<h1 class="text-center pt-4 pb-4">Gallery</h1>
 
-<!--Form for adding new pictures in the list-->
+  <h3 class="text-center pt-4 pb-4">Albums</h3>
+
+  <!--Form for adding new albums into the list-->
+  <div class="form-inline">
+    <div class="container">
+      <div class="form-group mb-2">
+        <label for="album-name" class="sr-only">Name of album</label>
+        <input type="text" class="form-control mb-3" id="album-name" placeholder="enter name of album">
+      </div>
+      <button type="submit" class="btn btn-primary mb-5 mt-2" id="btn-create" onclick="onCreate()">Create</button>
+      <div id="albumDisplayArea"></div>
+    </div>
+    <div class="container bg-light gallery mt-3 mb-3">
+      <div class="row g-3" id="albums-container">
+      </div>
+    </div>
+  </div>
+
+  <h3 class="text-center pt-4 pb-4">All pictures</h3>
+<!--Form for adding new pictures into the list-->
 <div class="form-inline">
   <div class="container">
     <div class="form-group mb-2">
@@ -57,6 +76,11 @@
 
       <label for="add-picture" class="sr-only">Add Picture</label>
       <input type="text" class="form-control" id="add-picture" placeholder="enter URL">
+
+      <label class="sr-only mt-3" for="album-selector">Albums</label>
+      <select class="custom-select sr-only mt-3" id="album-selector">
+        <option>Choose...</option>
+      </select>
     </div>
     <button type="submit" class="btn btn-primary mb-5 mt-2" id="btn-submit" onclick="onSubmit()">Submit</button>
     <div id="imgDisplayArea"></div>
