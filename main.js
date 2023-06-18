@@ -43,7 +43,7 @@ function deletePhoto(parentId, url) {
 
 // Add image with label and save in the LocalStorage
 function addImage() {
-    const imgUrl = document.getElementById('AddPicture').value;
+    const imgUrl = document.getElementById('add-picture').value;
     const imgLabel = document.getElementById('imgLabel').value;
 
     // Stop add image if input is empty
@@ -75,7 +75,7 @@ function displayImage(label, url) {
 
     let pictureElement = document.createElement('div');
     pictureElement.classList.add('picture');
-    pictureElement.style.backgroundImage = `url(${url})`;
+    pictureElement.style.backgroundImage = `url(${url}), url(./assets/img/default.png)`;
     columnElement.appendChild(pictureElement);
 
     let labelElement = document.createElement('p');
@@ -96,7 +96,7 @@ function displayImage(label, url) {
     container.insertBefore(columnElement, container.firstChild);
 
     // After executing the request, I remove the url from the input
-    document.getElementById('AddPicture').value = "";
+    document.getElementById('add-picture').value = "";
 
     // After executing the request, I remove the label from the input
     document.getElementById('imgLabel').value = "";
