@@ -42,15 +42,32 @@ function deletePhoto(parentId, url) {
 }
 
 // Add image with label and save in the LocalStorage
-function addImage() {
-    const imgUrl = document.getElementById('add-picture').value;
-    const imgLabel = document.getElementById('imgLabel').value;
+function onSubmit() {
+    const url = document.getElementById('add-picture').value;
+    const label = document.getElementById('imgLabel').value;
 
     // Stop add image if input is empty
-    if (!imgUrl.trim()) {
+    if (!url.trim()) {
        return;
     }
 
+    // Check if image has error, then use default image.
+    const img = new Image();
+    img.src = url;
+
+    // If image loaded successfully continue
+    img.onload = function () {
+        addImage(label, url);
+    };
+
+    // If image had error then set default local image
+    img.onerror = function () {
+        addImage(label, './assets/img/default.png');
+
+    };
+}
+
+function addImage(imgLabel, imgUrl) {
     // Save new image url with label to LocalStorage.
     const photo = {
         url: imgUrl,
@@ -75,7 +92,7 @@ function displayImage(label, url) {
 
     let pictureElement = document.createElement('div');
     pictureElement.classList.add('picture');
-    pictureElement.style.backgroundImage = `url(${url}), url(./assets/img/default.png)`;
+    pictureElement.style.backgroundImage = `url(${url})`;
     columnElement.appendChild(pictureElement);
 
     let labelElement = document.createElement('p');
