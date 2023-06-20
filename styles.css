@@ -57,3 +57,10 @@
     border-radius: 30px;
     display: none;
 }
+
+.btn-show {
+    position: relative;
+    top:-13px;
+    left: 50%;
+    transform: translate(-50%, 0)
+}

@@ -4,9 +4,6 @@ let albums = [];
 // Empty list of objects for URL, labels and AlbumID of images.
 let photos = [];
 
-// Empty list of objects for album options.
-let options = [];
-
 // Checkin if list of pictures isn't empty.
 const dataImg = loadPictures();
 if (dataImg) {
@@ -179,7 +176,10 @@ function displayAlbum(album) {
 
     let pictureAlbumElement = document.createElement('div');
     pictureAlbumElement.classList.add('picture');
-    pictureAlbumElement.style.backgroundImage = `url(./assets/img/folder.jpg)`;
+    pictureAlbumElement.style.backgroundImage = `url(./assets/img/folder.png)`;
+    pictureAlbumElement.onclick = function () {
+        showAlbumPhotos(album.id);
+    };
     columnAlbumElement.appendChild(pictureAlbumElement);
 
     let nameElement = document.createElement('p');
@@ -224,7 +224,7 @@ function loadAlbums() {
     return localStorage.getItem("albums");
 }
 
-// Adding albums options into the selector
+// Adding albums options into the selector.
 function addOptions(album) {
     let x = document.getElementById("album-selector");
     let option = document.createElement("option");
@@ -232,3 +232,35 @@ function addOptions(album) {
     option.text= album.name;
     x.add(option);
 }
+
+// Show photos for clicked album.
+function showAlbumPhotos(albumId) {
+
+    // Clear the display.
+    const container = document.getElementById('picture-container');
+    container.innerHTML = '';
+
+    // Filter all photos by album ID.
+    let albumPhotos = photos.filter(function (photo) {
+        return photo.albumId === albumId;
+    });
+
+    // Generate filtered photos.
+    for (let photo of albumPhotos) {
+        displayImage(photo.label, photo.url);
+    }
+}
+
+// Show all photos
+function showAll() {
+    // Clear the display.
+    const container = document.getElementById('picture-container');
+    container.innerHTML = '';
+
+    for (let photo of photos) {
+        displayImage(photo.label, photo.url);
+    }
+}
+
+
+
