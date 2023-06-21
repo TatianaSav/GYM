@@ -31,7 +31,8 @@ window.addEventListener("load", function () {
     });
     // Looping in the list and generate images and labels.
     for (let photo of photos) {
-        displayImage(photo.label, photo.url);
+        photo.date = new Date(photo.date)
+        displayImage(photo);
     }
 
     // Looping in the list and generate albums.
@@ -47,11 +48,11 @@ function topFunction() {
 }
 
 // When click on the button "X" the image will be deleted.
-function deletePhoto(parentId, url) {
+function deletePhoto(parentId, id) {
     let elem = document.getElementById(parentId);
     elem.remove();
 
-    photos = photos.filter(photo => photo.url !== url);
+    photos = photos.filter(photo => photo.id !== id);
     savePictures();
 }
 
@@ -72,7 +73,7 @@ function onSubmit() {
 
     // Stop add image if input is empty.
     if (!url.trim()) {
-       return;
+        return;
     }
 
     // Check if image has error, then use default image.
@@ -97,13 +98,15 @@ function addImage(imgLabel, imgUrl, albumId) {
         url: imgUrl,
         label: imgLabel,
         albumId: albumId,
+        date: new Date(),
+        id: Math.random().toString(16).slice(2),
     }
 
     photos.push(photo);
     savePictures();
 
     // Create image with label based on user's input.
-    displayImage(photo.label, photo.url);
+    displayImage(photo);
 
 }
 
@@ -129,7 +132,7 @@ function onCreate() {
 }
 
 // Adding images by url and label.
-function displayImage(label, url) {
+function displayImage(photo) {
     const container = document.getElementById('picture-container');
 
     // Creating elements for support new pictures.
@@ -139,18 +142,23 @@ function displayImage(label, url) {
 
     let pictureElement = document.createElement('div');
     pictureElement.classList.add('picture');
-    pictureElement.style.backgroundImage = `url(${url})`;
+    pictureElement.style.backgroundImage = `url(${photo.url})`;
     columnElement.appendChild(pictureElement);
 
     let labelElement = document.createElement('p');
     labelElement.classList.add('text-center');
-    labelElement.innerText = label;
+    labelElement.innerText = photo.label;
     columnElement.appendChild(labelElement);
+
+    let dateElement = document.createElement('p');
+    dateElement.classList.add('text-center');
+    dateElement.innerText = photo.date.toDateString();
+    columnElement.appendChild(dateElement);
 
     let buttonElement = document.createElement('button');
     buttonElement.classList.add('btn', 'btn-dark', 'btn-custom', 'mt-2');
     buttonElement.onclick = function () {
-        deletePhoto(columnElement.id, url);
+        deletePhoto(columnElement.id, photo.id);
     };
     buttonElement.innerText = "X";
     pictureElement.appendChild(buttonElement);
@@ -206,7 +214,7 @@ function displayAlbum(album) {
 
 // Save URl in Local Storage.
 function savePictures() {
-  localStorage.setItem("images", JSON.stringify(photos));
+    localStorage.setItem("images", JSON.stringify(photos));
 }
 
 // load URl in Local Storage.
@@ -228,8 +236,8 @@ function loadAlbums() {
 function addOptions(album) {
     let x = document.getElementById("album-selector");
     let option = document.createElement("option");
-    option.value= album.id;
-    option.text= album.name;
+    option.value = album.id;
+    option.text = album.name;
     x.add(option);
 }
 
@@ -247,7 +255,7 @@ function showAlbumPhotos(albumId) {
 
     // Generate filtered photos.
     for (let photo of albumPhotos) {
-        displayImage(photo.label, photo.url);
+        displayImage(photo);
     }
 }
 
@@ -258,7 +266,7 @@ function showAll() {
     container.innerHTML = '';
 
     for (let photo of photos) {
-        displayImage(photo.label, photo.url);
+        displayImage(photo);
     }
 }
 
