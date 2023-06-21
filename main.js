@@ -143,6 +143,11 @@ function displayImage(photo) {
     let pictureElement = document.createElement('div');
     pictureElement.classList.add('picture');
     pictureElement.style.backgroundImage = `url(${photo.url})`;
+
+    // Add click handler for parent element.
+    pictureElement.onclick = function () {
+        pictureElement.classList.add('full-screen');
+    }
     columnElement.appendChild(pictureElement);
 
     let labelElement = document.createElement('p');
@@ -157,8 +162,19 @@ function displayImage(photo) {
 
     let buttonElement = document.createElement('button');
     buttonElement.classList.add('btn', 'btn-dark', 'btn-custom', 'mt-2');
-    buttonElement.onclick = function () {
-        deletePhoto(columnElement.id, photo.id);
+
+    // Add click handler for "X" button.
+    buttonElement.onclick = function (event) {
+
+        // Stop clicking projection to prevent parent function from getting called.
+        event.stopPropagation();
+
+        // If picture in the full-screen mode then go out of full-screen, otherwise delete this photo.
+        if (pictureElement.classList.contains('full-screen')) {
+            pictureElement.classList.remove('full-screen')
+        } else {
+            deletePhoto(columnElement.id, photo.id);
+        }
     };
     buttonElement.innerText = "X";
     pictureElement.appendChild(buttonElement);
@@ -259,7 +275,7 @@ function showAlbumPhotos(albumId) {
     }
 }
 
-// Show all photos
+// Show all photos.
 function showAll() {
     // Clear the display.
     const container = document.getElementById('picture-container');
@@ -269,6 +285,3 @@ function showAll() {
         displayImage(photo);
     }
 }
-
-
-

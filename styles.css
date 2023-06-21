@@ -46,6 +46,7 @@
     border-radius: 30px;
     transition: box-shadow .3s;
 }
+
 .fab:hover {
     box-shadow: 0 6px 20px rgba(0, 0, 0, .4);
 }
@@ -60,7 +61,22 @@
 
 .btn-show {
     position: relative;
-    top:-13px;
+    top: -13px;
     left: 50%;
     transform: translate(-50%, 0)
+}
+
+.gallery .picture.full-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10000;
+    border-radius: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: rgba(0, 0, 0, 0.85);
 }
