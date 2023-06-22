@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>GYM</title>
+  <title>Gallery</title>
   <!-- Load Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
         rel="stylesheet"
@@ -21,83 +21,79 @@
 <body>
 
 <!-- NavBar -->
-<nav id="TopFit" class="navbar fixed-top bg-dark navbar-expand-sm" data-bs-theme="dark">
+<nav id="Gallery" class="navbar fixed-top bg-dark navbar-expand-sm" data-bs-theme="dark">
   <div class="container">
-    <a class="navbar-brand fs-3" href="#">Top Fit</a>
+    <a class="navbar-brand fs-3" href="#">My Gallery</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav  ms-auto">
-        <a class="nav-link" href="#">Classes</a>
-        <a class="nav-link" href="#">Personal Workouts</a>
-        <a class="nav-link" href="#">Prices&Plans</a>
-        <a class="nav-link" href="#">Schedule</a>
-        <a class="nav-link" href="#">Gallery</a>
-        <a class="nav-link" href="#">Contacts</a>
+        <a class="nav-link" href="#">About us</a>
+        <a class="nav-link" href="#">Examples</a>
       </div>
     </div>
   </div>
 </nav>
 
-<!-- Cover -->
-<div class="container-fluid cover d-flex flex-column align-items-center">
-  <p class="fs-1 fw-weight-bold text-center" style="width: 18rem;">GET IN SHAPE <br> & <br> BE HEALTHY</p>
-</div>
+<div class="container pt-5">
+  <div class="container pt-5">
+    <div class="card pt-5" style="width: 27rem; height: 40rem; margin: auto">
+      <h2 class="text-center pt-0">Form</h2>
 
-<div class="container">
-  <div id=Pictures class="bg-light py-5">
-    <h1 class="text-center pt-4 pb-4">Gallery</h1>
-
-    <h3 class="text-center pt-4 pb-4">Albums</h3>
-
-    <!--Form for adding new albums into the list-->
-    <div class="form-inline">
-      <div class="container">
-        <div class="form-group mb-2">
-          <label for="album-name" class="sr-only">Name of album</label>
-          <input type="text" class="form-control mb-3" id="album-name" placeholder="enter name of album">
+      <!--Form for adding new albums into the list-->
+      <div class="form-inline">
+        <div class="container">
+          <div class="form-group pt-5">
+            <label for="album-name" class="sr-only">Name of album</label>
+            <input type="text" class="form-control mb-3" id="album-name" placeholder="enter name of album">
+          </div>
+          <button type="submit" class="btn btn-primary mb-5 mt-2" id="btn-create" onclick="onCreate()">Create</button>
+          <div id="albumDisplayArea"></div>
         </div>
-        <button type="submit" class="btn btn-primary mb-5 mt-2" id="btn-create" onclick="onCreate()">Create</button>
-        <div id="albumDisplayArea"></div>
       </div>
-      <div class="container bg-light gallery mt-3 mb-3">
-        <div class="row g-3" id="albums-container">
+
+
+      <!--Form for adding new pictures into the list-->
+      <div class="form-inline">
+        <div class="container">
+          <div class="form-group mb-2">
+            <label for="imgLabel" class="sr-only">Label</label>
+            <input type="text" class="form-control mb-3" id="imgLabel" placeholder="enter label">
+
+            <label for="add-picture" class="sr-only">Add Picture</label>
+            <input type="text" class="form-control" id="add-picture" placeholder="enter URL">
+
+            <label class="sr-only mt-3" for="album-selector">Albums</label>
+            <select class="custom-select sr-only mt-3" id="album-selector">
+              <option>Choose...</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary mb-5 mt-2" id="btn-submit" onclick="onSubmit()">Submit</button>
         </div>
+        <button type="button" class="btn btn-primary mb-5 mt-2 btn-show" id="btn-show-all" onclick="showAll()">Show all
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id=Pictures class="py-2">
+    <h2 class="text-center py-5 pb-4">Albums</h2>
+    <div class="container gallery mt-3 mb-3">
+      <div class="row g-3" id="albums-container">
+      </div>
+    </div>
+    <h2 class="text-center py-5 pb-4">All pictures</h2>
+    <div class="container gallery mt-3 mb-3">
+      <div class="row g-3" id="picture-container">
       </div>
     </div>
 
-    <h3 class="text-center pt-4 pb-4">All pictures</h3>
-    <button type="show-all" class="btn btn-primary mb-5 mt-2 btn-show" id="btn-show-all" onclick="showAll()">Show all</button>
 
-    <!--Form for adding new pictures into the list-->
-    <div class="form-inline">
-      <div class="container">
-        <div class="form-group mb-2">
-          <label for="imgLabel" class="sr-only">Label</label>
-          <input type="text" class="form-control mb-3" id="imgLabel" placeholder="enter label">
-
-          <label for="add-picture" class="sr-only">Add Picture</label>
-          <input type="text" class="form-control" id="add-picture" placeholder="enter URL">
-
-          <label class="sr-only mt-3" for="album-selector">Albums</label>
-          <select class="custom-select sr-only mt-3" id="album-selector">
-            <option>Choose...</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary mb-5 mt-2" id="btn-submit" onclick="onSubmit()">Submit</button>
-        <div id="imgDisplayArea"></div>
-      </div>
-      <div class="container bg-light gallery mt-3 mb-3">
-        <div class="row g-3" id="picture-container">
-        </div>
-      </div>
-
-      <!-- Floating button -->
-      <button onclick="topFunction()" id="myBtn" title="Go to top" class="btn btn-dark fab">
-        Top
-      </button>
-    </div>
+    <!-- Floating button -->
+    <button onclick="topFunction()" id="myBtn" title="Go to top" class="btn btn-dark fab">
+      Top
+    </button>
   </div>
 </div>
 </body>

@@ -1,21 +1,8 @@
-.cover {
-    background-image: url(./assets/img/cover.jpg);
-    background-position: center;
-    background-size: cover;
-    box-shadow: inset 0 0 0 10000px rgba(0, 0, 0, 0.6);
-    color: white;
-    padding-top: 300px;
-    padding-bottom: 200px;
-    height: 100vh;
-    backdrop-filter: none;
-}
-
-
 .gallery .picture {
-    border-radius: 30px;
+    border-radius: 20px;
     background-position: center;
     background-size: cover;
-    height: 300px;
+    height: 250px;
     margin: auto;
     transition: box-shadow .3s;
     position: relative;
@@ -29,6 +16,24 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, .4);
 }
 
+.gallery .album {
+    border-radius: 20px;
+    background-position: center;
+    background-size: cover;
+    height: 150px;
+    width: 150px;
+    margin: auto;
+    transition: box-shadow .3s;
+    position: relative;
+}
+
+.gallery .album:hover .btn-custom {
+    display: block;
+}
+
+.gallery .album:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .4);
+}
 
 .fab {
     display: none;

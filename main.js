@@ -88,10 +88,16 @@ function onSubmit() {
     // If image had error then set default local image.
     img.onerror = function () {
         addImage(label, './assets/img/default.png', albumId);
-
     };
 }
 
+/**
+ * Creat a new picture and save a new list in the Local Storage.
+ *
+ * @param imgLabel Picture label.
+ * @param imgUrl Picture URL address.
+ * @param albumId The album the pictures belongs to.
+ */
 function addImage(imgLabel, imgUrl, albumId) {
     // Save new image url with label to LocalStorage.
     const photo = {
@@ -107,7 +113,6 @@ function addImage(imgLabel, imgUrl, albumId) {
 
     // Create image with label based on user's input.
     displayImage(photo);
-
 }
 
 // Add album and save in the LocalStorage.
@@ -137,11 +142,12 @@ function displayImage(photo) {
 
     // Creating elements for support new pictures.
     let columnElement = document.createElement('div');
-    columnElement.classList.add('col-12', 'col-md-6', 'col-lg-3');
+    columnElement.classList.add('col-12', 'col-md-6', 'col-lg-3','card');
     columnElement.id = Math.random().toString(16).slice(2);
+    columnElement.style.width = '18rem';
 
     let pictureElement = document.createElement('div');
-    pictureElement.classList.add('picture');
+    pictureElement.classList.add('picture', 'card-img-top');
     pictureElement.style.backgroundImage = `url(${photo.url})`;
 
     // Add click handler for parent element.
@@ -150,15 +156,43 @@ function displayImage(photo) {
     }
     columnElement.appendChild(pictureElement);
 
-    let labelElement = document.createElement('p');
-    labelElement.classList.add('text-center');
+    let cardBodyElement = document.createElement('div');
+    cardBodyElement.classList.add('card-body');
+    columnElement.appendChild(cardBodyElement);
+
+    let labelElement = document.createElement('h5');
+    labelElement.classList.add('card-title', 'text-center');
     labelElement.innerText = photo.label;
-    columnElement.appendChild(labelElement);
+    cardBodyElement.appendChild(labelElement);
 
     let dateElement = document.createElement('p');
     dateElement.classList.add('text-center');
     dateElement.innerText = photo.date.toDateString();
-    columnElement.appendChild(dateElement);
+    cardBodyElement.appendChild(dateElement);
+
+    let selectorElement = document.createElement('select');
+    selectorElement.classList.add('form-select');
+
+    // Add all albums in the selector.
+    for (let album of albums) {
+        let option = document.createElement("option");
+        option.value = album.id;
+        option.text = album.name;
+        selectorElement.add(option);
+    }
+
+    // Give to selector current album.
+    if (photo.albumId) {
+        selectorElement.value = photo.albumId;
+    }
+
+    // Changing the album for picture.
+    selectorElement.addEventListener('change', function (event) {
+        photo.albumId = event.target.value;
+        savePictures();
+    })
+
+    cardBodyElement.appendChild(selectorElement);
 
     let buttonElement = document.createElement('button');
     buttonElement.classList.add('btn', 'btn-dark', 'btn-custom', 'mt-2');
@@ -195,11 +229,11 @@ function displayAlbum(album) {
 
     // Creating elements for support new albums.
     let columnAlbumElement = document.createElement('div');
-    columnAlbumElement.classList.add('col-12', 'col-md-6', 'col-lg-3');
+    columnAlbumElement.classList.add('col-12', 'col-md-6', 'col-lg-2');
     columnAlbumElement.id = album.id;
 
     let pictureAlbumElement = document.createElement('div');
-    pictureAlbumElement.classList.add('picture');
+    pictureAlbumElement.classList.add('album');
     pictureAlbumElement.style.backgroundImage = `url(./assets/img/folder.png)`;
     pictureAlbumElement.onclick = function () {
         showAlbumPhotos(album.id);
@@ -257,7 +291,11 @@ function addOptions(album) {
     x.add(option);
 }
 
-// Show photos for clicked album.
+/**
+ * Show photos for clicked album.
+ *
+ * @param albumId Album ID to filter photos from.
+ */
 function showAlbumPhotos(albumId) {
 
     // Clear the display.
@@ -265,9 +303,7 @@ function showAlbumPhotos(albumId) {
     container.innerHTML = '';
 
     // Filter all photos by album ID.
-    let albumPhotos = photos.filter(function (photo) {
-        return photo.albumId === albumId;
-    });
+    let albumPhotos = photos.filter(photo => photo.albumId === albumId);
 
     // Generate filtered photos.
     for (let photo of albumPhotos) {
