@@ -1,11 +1,10 @@
 .gallery .picture {
-    border-radius: 20px;
     background-position: center;
     background-size: cover;
-    height: 250px;
+    height: 300px;
     margin: auto;
-    transition: box-shadow .3s;
     position: relative;
+    transition: width 50ms, height 1s, transform 2s;
 }
 
 .gallery .picture:hover .btn-custom {
@@ -35,6 +34,10 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, .4);
 }
 
+.chosen-album {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .4);
+}
+
 .fab {
     display: none;
     position: fixed;
@@ -60,8 +63,16 @@
     position: absolute;
     top: 1px;
     right: 6px;
-    border-radius: 30px;
+    border-radius: 25px;
     display: none;
+}
+
+.btn-edit {
+    position: absolute;
+    top: 250px;
+    right: 6px;
+    border-radius: 25px;
+    display: block;
 }
 
 .btn-show {
@@ -84,4 +95,9 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-color: rgba(0, 0, 0, 0.85);
+
+}
+
+.card-header[aria-expanded=false] {
+    border-bottom-color: transparent;
 }
